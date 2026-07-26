@@ -11,7 +11,7 @@ class Packet:
         self.v_ihl = (self.version << 4) | self.IHL
 
         self.tos = 0x00
-        self.
+        self.total_length = 0x33 
         print(self.v_ihl)
 
 packet = Packet()
