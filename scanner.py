@@ -20,6 +20,7 @@ class Packet:
         self.identification = 0x5
         self.flag = 0x0
         self.fragment_offset = 0x0
+        self.f_fragment_offset = (self.flag << 13) | self.fragment_offset
 
         # -- THIRD CHUNK ##
         self.ttl = 0x40
