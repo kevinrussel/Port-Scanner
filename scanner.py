@@ -1,3 +1,5 @@
+import socket
+
 ip_addres = '127.0.0.1'
 port_range_low = 8000
 port_range_high = 8080
@@ -26,7 +28,9 @@ class Packet:
 
         #-- FOURTH CHUNK --#
         self.src_ip = src_ip
+        self.src_addr = socket.inet_aton(self.src_ip)
+        print(self.src_addr)
         #-- FIFTH CHUNK -- #
         self.dest_ip = dest_ip
 
-packet = Packet()
+packet = Packet("127.0.0.1", "127.0.0.1", 8080)
