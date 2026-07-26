@@ -7,4 +7,6 @@ print(x)
 class Packet:
 
     def __init__(self):
-        
+        self.version = 0x4
+        self.IHL = 0x5
+        self.v_ihl = (self.version << 4) | self.IHL
