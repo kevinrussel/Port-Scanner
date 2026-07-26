@@ -26,6 +26,7 @@ class Packet:
 
         #-- FOURTH CHUNK --#
         self.src_ip = src_ip
+        #-- FIFTH CHUNK -- #
         self.dest_ip = dest_ip
 
 packet = Packet()
