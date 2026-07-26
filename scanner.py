@@ -3,3 +3,8 @@ port_range_low = 8000
 port_range_high = 8080
 x = "hi".tobytes()
 print(x)
+
+class Packet:
+
+    def __init__(self):
+        
