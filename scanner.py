@@ -9,6 +9,9 @@ class Packet:
         self.version = 0x4
         self.IHL = 0x5
         self.v_ihl = (self.version << 4) | self.IHL
+
+        self.tos = 0x00
+        self.
         print(self.v_ihl)
 
 packet = Packet()
