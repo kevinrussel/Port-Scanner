@@ -16,5 +16,7 @@ class Packet:
 
         #-- SECOND CHUNK ##
         self.identification = 0x5
+        self.flag = 0x0
+        self.fragment_offset = 0x0
 
 packet = Packet()
