@@ -21,6 +21,7 @@ class Packet:
 
         # -- THIRD CHUNK ##
         self.ttl = 0x40
+        self.protocol = 0x6
         
 
 packet = Packet()
