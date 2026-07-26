@@ -14,4 +14,7 @@ class Packet:
         self.total_length = 0x33 
         print(self.v_ihl)
 
+        #-- SECOND CHUNK ##
+        self.identification = 0x5
+
 packet = Packet()
