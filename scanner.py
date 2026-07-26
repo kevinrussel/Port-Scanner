@@ -5,7 +5,7 @@ port_range_high = 8080
 
 class Packet:
 
-    def __init__(self):
+    def __init__(self,src_ip, dest_ip, dest_port):
         # -- FIRST CHUNK ## 
         self.version = 0x4
         self.IHL = 0x5
