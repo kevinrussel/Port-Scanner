@@ -24,4 +24,8 @@ class Packet:
         self.protocol = 0x6
         self.checksum = 0x0
 
+        #-- FOURTH CHUNK --#
+        self.src_ip = src_ip
+        self.dest_ip = dest_ip
+
 packet = Packet()
