@@ -19,4 +19,6 @@ class Packet:
         self.flag = 0x0
         self.fragment_offset = 0x0
 
+        # -- THIRD CHUNK ##
+
 packet = Packet()
