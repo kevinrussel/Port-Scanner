@@ -32,9 +32,12 @@ class Packet:
         self.src_ip = src_ip
         self.src_addr = socket.inet_aton(self.src_ip)
         print(self.src_addr)
+
         #-- FIFTH CHUNK -- #
         self.dest_ip = dest_ip
         self.dest_addr = socket.inet_aton(self.dest_ip)
+
+        # -- TCP HEADER --#
 
 
 
