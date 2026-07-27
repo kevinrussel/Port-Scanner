@@ -40,7 +40,7 @@ class Packet:
         # -- TCP HEADER --#
         ## First Chunk
         self.src_port = 0x1F90
-        self.dest_port = 0x1F91
+        self.dest_port = dest_port
 
 
-packet = Packet("127.0.0.1", "127.0.0.1", 8080)
+packet = Packet("127.0.0.1", "127.0.0.1", 8081)
