@@ -14,7 +14,7 @@ class Packet:
         self.IHL = 0x5
         self.v_ihl = (self.version << 4) | self.IHL
         self.tos = 0x00
-        self.total_length = 0x33 
+        self.total_length = 0x28
         print(self.v_ihl)
 
         #-- SECOND CHUNK ##
