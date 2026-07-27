@@ -49,6 +49,7 @@ class Packet:
         ## Third chucnk
         self.tcp_offset = 0x5
         self.reserved = 0x0
+        self.ns = 0x0
         self.cwr = 0x0
         self.ece = 0x0
         self.urg = 0x0
@@ -57,7 +58,7 @@ class Packet:
         self.rst = 0x0
         self.syn = 0x1
         self.fin = 0x0
-        self.data_offset_res_flags
+        self.data_offset_res_flags = (self.tcp_offset << 12) | (self.reserved << 9) | (self.ns << 8) | (self.cwr << 7)|(self.ece << 6) | (self.urg << 5) | (self.ack << 4) | (self.psh << 3) | (self.rst << 2) | (self.syn << 1) | (self.fin)
 
 
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
