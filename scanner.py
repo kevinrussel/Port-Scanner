@@ -65,4 +65,8 @@ class Packet:
         self.tcp_checksum = 0x0
         self.urg_pointer = 0x0
 
+        self.ip_header = b""
+        self.tcp_header = b""
+        self.packet = b""
+
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
