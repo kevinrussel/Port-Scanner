@@ -42,5 +42,9 @@ class Packet:
         self.src_port = 0x1F90
         self.dest_port = dest_port
 
+        ## Second chunk
+        self.seq_num = 0x0
+        self.ack_num = 0x0
+
 
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
