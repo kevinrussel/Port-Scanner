@@ -54,6 +54,10 @@ class Packet:
         self.urg = 0x0
         self.ack = 0x0
         self.psh = 0x0
+        self.rst = 0x0
+        self.syn = 0x1
+        self.fin = 0x0
+        self.data_offset_res_flags
 
 
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
