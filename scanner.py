@@ -46,5 +46,9 @@ class Packet:
         self.seq_num = 0x0
         self.ack_num = 0x0
 
+        ## Third chucnk
+        self.tcp_offset = 0x0
+        self.reserved = 0x0
+
 
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
