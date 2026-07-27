@@ -34,6 +34,7 @@ class Packet:
         print(self.src_addr)
         #-- FIFTH CHUNK -- #
         self.dest_ip = dest_ip
+        self.dest_addr = socket.inet_aton(self.dest_ip)
 
 
 
