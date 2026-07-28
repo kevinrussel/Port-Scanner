@@ -71,6 +71,6 @@ class Packet:
 
     def generate_packet(self):
         # IP Header + checksum
-        final_ip_header = pack("!B",self.v_ihl)
+        final_ip_header = pack("!BBHHH",self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset)
 
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
