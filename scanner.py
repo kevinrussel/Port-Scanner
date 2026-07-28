@@ -69,4 +69,7 @@ class Packet:
         self.tcp_header = b""
         self.packet = b""
 
+    def generate_packet(self):
+        
+
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
