@@ -98,4 +98,9 @@ class Packet:
         pseudo_header = pack("!4s4sBBH",self.src_addr,self.dest_addr,0x0,self.protocol,len(tmp_tcp_header))
         psh = pseudo_header + tmp_tcp_header
         final_tcp_header = pack("!HHLLHHHH",self.src_port,self.dest_port,self.seq_num,self.ack_num,self.data_offset_res_flags,self.window_size,self.calc_checksum(psh),self.urg_pointer)
+
+
+        self.ip_header  = final_ip_header
+        self.tcp_header = final_tcp_header
+        self.packet = self.ip_header + self.tcp_header
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
