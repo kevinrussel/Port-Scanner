@@ -70,10 +70,10 @@ class Packet:
         self.packet = b""
 
     def generate_tmp_ip_header(self):
-        tmp_ip_header = pack("!BB", self.v_ihl,self.tos)
+        tmp_ip_header = pack("!BB", self.v_ihl,self.tos,self.total_length)
 
     def generate_packet(self):
         # IP Header + checksum
-        final_ip_header = pack("!BB",self.v_ihl,self.tos)
+        final_ip_header = pack("!BB",self.v_ihl,self.tos,self.total_length)
 
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
