@@ -120,7 +120,7 @@ class Packet:
             src_port, dst_port, seq, ack, off_flags, *_ = struct.unpack(
                 "!HHLLHHHH", tcp
             )
-            if src_port == 8081 and dst_port == 8080:
+            if src_port == self.dest_port and dst_port == self.src_port:
                 break
         s.close()
         return data
