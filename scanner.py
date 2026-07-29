@@ -126,6 +126,8 @@ class Packet:
                 break
         s.close()
         return data
+
+    
 import struct
 def check_if_open(port, response):
     cont = binascii.hexlify(response)
