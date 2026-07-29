@@ -109,7 +109,21 @@ class Packet:
         s = socket.socket(socket.AF_INET,socket.SOCK_RAW,socket.IPPROTO_TCP)
         s.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
         s.sendto(self.packet,(self.dest_ip,0))
-        data = s.recv(1024)
+
+
+
+        while True:
+            data = s.recv(1024)
+
+            ip = data[:20]
+            tcp = data[20:40]
+
+            src_port, dst_port, seq, ack, off_flags, *_ = struct.unpack(
+                "!HHLLHHHH", tcp
+            )
+
+            if src_port == 8081 and dst_port == 8080:
+                break
         s.close()
         return data
 import struct
@@ -131,5 +145,7 @@ def check_if_open(port, response):
     
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
 packet.generate_packet()
+
+
 result = packet.send_packet()
 check_if_open(8081,result)
