@@ -69,11 +69,23 @@ class Packet:
         self.tcp_header = b""
         self.packet = b""
 
+    def calc_checksum(self, msg):
+        s = 0
+        for i in range(0, len(msg), 2):
+            w = (msg[i] << 8) + msg[i+1] 
+            s = s + w
+        # s = 0x119cc
+        s = (s >> 16) + (s & 0xffff)
+        # s = 0x19cd
+        s = ~s & 0xffff
+        # s = 0xe632
+        return s
+
     def generate_tmp_ip_header(self):
-        tmp_ip_header = pack("!BBHHHB", self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset,self.ttl)
+        tmp_ip_header = pack("!BBHHHBB", self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset,self.ttl,self.protocol)
 
     def generate_packet(self):
         # IP Header + checksum
-        final_ip_header = pack("!BBHHHB",self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset,self.ttl)
+        final_ip_header = pack("!BBHHHB",self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset,self.ttl,self.protocol)
 
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
