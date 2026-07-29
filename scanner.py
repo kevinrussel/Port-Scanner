@@ -112,9 +112,18 @@ class Packet:
         data = s.recv(1024)
         s.close()
         return data
-
+import struct
 def check_if_open(port, response):
     cont = binascii.hexlify(response)
+
+    ip = response[:20]
+    tcp = response[20:40]
+    src_port, dst_port, seq, ack, flags, *_ = struct.unpack(
+    "!HHLLHHHH", tcp
+)
+    
+    print(src_port, dst_port)
+    print(hex(flags & 0x1FF))
     if cont[65:68] == b"012":
         print("Port "+str(port)+" is: open")
     else:
