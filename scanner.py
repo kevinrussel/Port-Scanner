@@ -114,14 +114,12 @@ class Packet:
         ## Linux sends an immediate SYN back the moment we send out the packet, this is to ignore that
         while True:
             data = s.recv(1024)
-
             ip = data[:20]
             tcp = data[20:40]
 
             src_port, dst_port, seq, ack, off_flags, *_ = struct.unpack(
                 "!HHLLHHHH", tcp
             )
-
             if src_port == 8081 and dst_port == 8080:
                 break
         s.close()
