@@ -88,11 +88,13 @@ class Packet:
 
     def generate_tmp_tcp_header(self):
         tmp_tcp_header = pack("!HHLLHHHH",self.src_port,self.dest_port,self.seq_num,self.ack_num,self.data_offset_res_flags,self.window_size,self.tcp_checksum,self.urg_pointer)
-
+        return tmp_tcp_header
     
     def generate_packet(self):
         # IP Header + checksum
         final_ip_header = pack("!BBHHHBBH4s4s",self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset,self.ttl,self.protocol,self.calc_checksum(self.generate_tmp_ip_header()),self.src_addr,self.dest_addr)
 
+        tmp_tcp_header = self.generate_tmp_tcp_header()
+        pseudo_header = pack("!4s",self.src_addr)
         final_tcp_header = pack("!HHLLHHHH",self.src_port,self.dest_port,self.seq_num,self.ack_num,self.data_offset_res_flags,self.window_size,self.calc_checksum(self.generate_tmp_tcp_header()),self.urg_pointer)
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
