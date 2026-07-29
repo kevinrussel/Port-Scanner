@@ -115,3 +115,4 @@ class Packet:
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
 packet.generate_packet()
 result = packet.send_packet()
+print(result)
