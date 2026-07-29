@@ -1,5 +1,6 @@
 import socket
 from struct import *
+import binascii
 ip_addres = '127.0.0.1'
 port_range_low = 8000
 port_range_high = 8080
@@ -111,8 +112,15 @@ class Packet:
         data = s.recv(1024)
         s.close()
         return data
+
+def check_if_open(port, response):
+    cont = binascii.hexlify(response)
+    if cont[65:68] == b"012":
+        print("Port "+str(port)+" is: open")
+    else:
+        print("Port "+str(port)+" is: closed")
     
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
 packet.generate_packet()
 result = packet.send_packet()
-print(result)
+check_if_open(8081,result)
