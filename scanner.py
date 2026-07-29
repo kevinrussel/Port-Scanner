@@ -111,7 +111,7 @@ class Packet:
         s.sendto(self.packet,(self.dest_ip,0))
 
 
-
+        ## Linux sends an immediate SYN back the moment we send out the packet, this is to ignore that
         while True:
             data = s.recv(1024)
 
