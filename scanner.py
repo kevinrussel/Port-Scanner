@@ -36,7 +36,7 @@ class Packet:
         #-- FIFTH CHUNK -- #
         self.dest_ip = dest_ip
         self.dest_addr = socket.inet_aton(self.dest_ip)
-        
+
         ####################################################
         # -- TCP HEADER --#
         ## First Chunk
@@ -83,10 +83,12 @@ class Packet:
         return s
 
     def generate_tmp_ip_header(self):
-        tmp_ip_header = pack("!BBHHHBBH", self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset,self.ttl,self.protocol,self.checksum)
+        tmp_ip_header = pack("!BBHHHBBH4s4s", self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset,self.ttl,self.protocol,self.checksum,self.src_addr,self.dest_addr)
+        return tmp_ip_header
 
+    
     def generate_packet(self):
         # IP Header + checksum
-        final_ip_header = pack("!BBHHHBH",self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset,self.ttl,self.protocol,self.calc_checksum(self.generate_tmp_ip_header()))
+        final_ip_header = pack("!BBHHHBH4s4s",self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset,self.ttl,self.protocol,self.calc_checksum(self.generate_tmp_ip_header()),self.src_addr,self.dest_addr)
 
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
