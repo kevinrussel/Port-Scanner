@@ -36,7 +36,8 @@ class Packet:
         #-- FIFTH CHUNK -- #
         self.dest_ip = dest_ip
         self.dest_addr = socket.inet_aton(self.dest_ip)
-
+        
+        ####################################################
         # -- TCP HEADER --#
         ## First Chunk
         self.src_port = 0x1F90
