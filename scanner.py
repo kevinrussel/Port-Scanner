@@ -70,7 +70,7 @@ class Packet:
         self.packet = b""
 
     def generate_tmp_ip_header(self):
-        tmp_ip_header = pack("")
+        tmp_ip_header = pack("!BB", self.v_ihl,self.tos)
 
     def generate_packet(self):
         # IP Header + checksum
