@@ -22,7 +22,7 @@ class Packet:
         self.flag = 0x0
         self.fragment_offset = 0x0
         self.f_fragment_offset = (self.flag << 13) | self.fragment_offset
-        print(f"fragment+offset {self.f_fragment_offset}")
+        
         # -- THIRD CHUNK ##
         self.ttl = 0x40
         self.protocol = 0x6
