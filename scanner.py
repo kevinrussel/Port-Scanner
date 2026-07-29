@@ -105,5 +105,11 @@ class Packet:
         self.packet = self.ip_header + self.tcp_header
 
     def send_packet(self):
-        
+        s = socket.socket(socket.AF_INET,socket.SOCK_RAW,socket.IPPROTO_TCP)
+        s.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
+        s.sendto(self.packet,(self.dest_ip,0))
+        data = s.recv(1024)
+        s.close()
+        return data
+    
 packet = Packet("127.0.0.1", "127.0.0.1", 8081)
