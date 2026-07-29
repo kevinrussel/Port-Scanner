@@ -69,6 +69,9 @@ class Packet:
         self.tcp_header = b""
         self.packet = b""
 
+    def generate_tmp_ip_header(self):
+        tmp_ip_header = pack(!)
+
     def generate_packet(self):
         # IP Header + checksum
         final_ip_header = pack("!BBHHHBBH",self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset,self.ttl,self.protocol,self.create_tmp_ip_header(),)
