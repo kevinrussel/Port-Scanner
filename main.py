@@ -1,5 +1,7 @@
 import scanner
 import struct
+import asyncio
+
 def check_if_open(port, response):
     
 
