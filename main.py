@@ -21,8 +21,11 @@ def check_if_open(port, response):
         print("Port "+str(port)+" is: open")
     else:
         print("Port "+str(port)+" is: closed")
-    
-for value in range(8081,8090):
-    packet = scanner.Packet("127.0.0.1", "127.0.0.1", value)
-    packet.generate_packet()
-    asyncio.run(send_packet(packet,value))
+async def main():   
+    for value in range(8081,8090):
+        packet = scanner.Packet("127.0.0.1", "127.0.0.1", value)
+        packet.generate_packet()
+        asyncio.run(send_packet(packet,value))
+
+
+asyncio.run(main())
