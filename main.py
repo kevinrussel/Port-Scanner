@@ -2,6 +2,10 @@ import scanner
 import struct
 import asyncio
 
+async def send_packet(packet,value):
+    result = await packet.send_packet()
+    check_if_open(value,result)
+
 def check_if_open(port, response):
     
 
@@ -20,7 +24,4 @@ def check_if_open(port, response):
 for value in range(8081,8090):
     packet = scanner.Packet("127.0.0.1", "127.0.0.1", value)
     packet.generate_packet()
-
-
-    result = packet.send_packet()
-    check_if_open(value,result)
+    asyncio.run(send_packet(packet,value))
