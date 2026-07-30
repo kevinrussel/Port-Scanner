@@ -1,5 +1,6 @@
 import socket
 from struct import *
+import asyncio
 
 
 
@@ -13,7 +14,7 @@ class Packet:
         self.v_ihl = (self.version << 4) | self.IHL
         self.tos = 0x00
         self.total_length = 0x28
-        print(self.v_ihl)
+        
 
         #-- SECOND CHUNK ##
         self.identification = 0x5
@@ -29,7 +30,7 @@ class Packet:
         #-- FOURTH CHUNK --#
         self.src_ip = src_ip
         self.src_addr = socket.inet_aton(self.src_ip)
-        print(self.src_addr)
+        
 
         #-- FIFTH CHUNK -- #
         self.dest_ip = dest_ip
@@ -102,16 +103,16 @@ class Packet:
         self.tcp_header = final_tcp_header
         self.packet = self.ip_header + self.tcp_header
 
-    def send_packet(self):
+    async def send_packet(self):
         s = socket.socket(socket.AF_INET,socket.SOCK_RAW,socket.IPPROTO_TCP)
         s.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
         s.setblocking(False)
         s.sendto(self.packet,(self.dest_ip,0))
-
+        loop = asyncio.get_event_loop()
 
         ## Linux sends an immediate SYN back the moment we send out the packet, this is to ignore that
         while True:
-            data = s.recv(1024)
+            data = await loop.sock_recv(s,1024)
             ip = data[:20]
             tcp = data[20:40]
 
