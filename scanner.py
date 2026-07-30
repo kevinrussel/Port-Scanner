@@ -114,7 +114,7 @@ class Packet:
             ip = data[:20]
             tcp = data[20:40]
 
-            src_port, dst_port, seq, ack, off_flags, *_ = struct.unpack(
+            src_port, dst_port, seq, ack, off_flags, *_ = unpack(
                 "!HHLLHHHH", tcp
             )
             if src_port == self.dest_port and dst_port == self.src_port:
