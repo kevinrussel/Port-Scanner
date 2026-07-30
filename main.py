@@ -3,8 +3,9 @@ import struct
 import asyncio
 
 async def send_packet(packet,value):
-    result = await packet.send_packet()
-    check_if_open(value,result)
+    print("Hello world")
+    # result = await packet.send_packet()
+    # check_if_open(value,result)
 
 def check_if_open(port, response):
     
