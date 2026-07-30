@@ -2,7 +2,12 @@ import scanner
 import struct
 import asyncio
 
-async def send_packet(packet,value):
+async def send_packet(src_ip, dest_ip, port):
+
+    packet = scanner.Packet(src_ip,dest_ip,port)
+    packet.generate_packet()
+    try:
+        
     print("Hello world")
     # result = await packet.send_packet()
     # check_if_open(value,result)
@@ -22,7 +27,7 @@ def check_if_open(port, response):
     else:
         print("Port "+str(port)+" is: closed")
 async def main():
-    tasks = [send_packet("127.0.0.1", "127.0.0.1") for value in range(8081,8090)]   
+    tasks = [send_packet("127.0.0.1", "127.0.0.1",value) for value in range(8081,8090)]   
     await asyncio.gather(*tasks)
 
 
