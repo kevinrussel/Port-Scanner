@@ -105,6 +105,7 @@ class Packet:
     def send_packet(self):
         s = socket.socket(socket.AF_INET,socket.SOCK_RAW,socket.IPPROTO_TCP)
         s.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
+        s.setblocking(False)
         s.sendto(self.packet,(self.dest_ip,0))
 
 

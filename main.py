@@ -7,10 +7,11 @@ async def send_packet(src_ip, dest_ip, port):
     packet = scanner.Packet(src_ip,dest_ip,port)
     packet.generate_packet()
     try:
-        
-    print("Hello world")
-    # result = await packet.send_packet()
-    # check_if_open(value,result)
+        result = await asyncio.wait_for(packet.send_packet(),timeout=1.0)
+        check_if_open(port,result)
+    except asyncio.TimeoutError:
+        print(f"Port {port} is: filtered (no response)")
+    
 
 def check_if_open(port, response):
     
