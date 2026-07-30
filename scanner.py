@@ -142,10 +142,10 @@ def check_if_open(port, response):
     else:
         print("Port "+str(port)+" is: closed")
     
-    
-packet = Packet("127.0.0.1", "127.0.0.1", 8081)
-packet.generate_packet()
+for value in range(8081,8090):
+    packet = Packet("127.0.0.1", "127.0.0.1", value)
+    packet.generate_packet()
 
 
-result = packet.send_packet()
-check_if_open(8081,result)
+    result = packet.send_packet()
+    check_if_open(value,result)
