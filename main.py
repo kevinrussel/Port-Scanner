@@ -28,7 +28,7 @@ def check_if_open(port, response):
         ans = "Port "+str(port)+" is: closed"
     results.append(ans)
 async def main():
-    tasks = [send_packet("127.0.0.1", "127.0.0.1",value) for value in range(5000,8090)]   
+    tasks = [send_packet("127.0.0.1", "127.0.0.1",value) for value in range(1000,8090)]   
     await asyncio.gather(*tasks)
     with open("answer.txt", "w") as file:
         for entry in results:
