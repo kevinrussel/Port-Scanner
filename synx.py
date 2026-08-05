@@ -15,5 +15,8 @@ class synx(cmd.Cmd):
     def do_hi(self,arg):
         print("this is working")
 
+    def do_quit(self,arg):
+        print("Thank you for trying SYNX \n")
+        return True
 
 synx().cmdloop()
