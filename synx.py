@@ -41,7 +41,10 @@ class synx(cmd.Cmd):
         print("Thank you for trying SYNX \n")
         return True
 
-
+    def print_open_ports(self,filename = "open_port.txt"):
+        with open(filename,"r") as f:
+            for line in f:
+                print(line.strip())
 
     def do_port(self,arg):
         parser = ShellArgParser(prog="port",add_help=False)
@@ -67,6 +70,7 @@ class synx(cmd.Cmd):
             return
         else:
             port_scanner.run(args.start, args.end)
+        self.print_open_ports()
         # print(arg)    
         # port_scanner.run()
 
