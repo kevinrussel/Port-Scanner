@@ -30,7 +30,7 @@ def check_if_open(port, response):
 async def main(start = 1000, end= 9000):
     tasks = [send_packet("127.0.0.1", "127.0.0.1",value) for value in range(start,end)]   
     await asyncio.gather(*tasks)
-    with open("port_ranges.txt", "w") as file:
+    with open("Every_Port_Status.txt", "w") as file:
         for entry in results:
             file.write(f"{entry}\n")
 
