@@ -28,4 +28,6 @@ class synx(cmd.Cmd):
         print("Thank you for trying SYNX \n")
         return True
 
+
+    do_exit = do_quit
 synx().cmdloop()
