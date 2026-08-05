@@ -2,7 +2,8 @@ import cmd
 
 
 class synx(cmd.Cmd):
-    pass
+    intro = "Welcome to synx!"
+    prompt = "synx > "
 
 
 synx().cmdloop()
