@@ -44,6 +44,8 @@ class synx(cmd.Cmd):
 
 
     def do_port(self,arg):
+        parser = ShellArgParser(prog="port",add_help=False)
+        
         print(arg)    
         port_scanner.run()
 
