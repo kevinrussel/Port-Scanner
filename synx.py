@@ -3,6 +3,20 @@ import os
 import subprocess
 import port_scanner
 
+
+import argparse
+import shlex
+
+class ArgParseError(Exception):
+    pass
+
+class ShellArgParser(argparse.ArgumentParser):
+    """argparse normally calls sys.exit() on error — override that
+    so a bad command doesn't kill the whole cmd loop."""
+    def error(self, message):
+        raise ArgParseError(message)
+
+
 class synx(cmd.Cmd):
     intro = r"""  _______     ___   ___   __
   / ____\ \   / / \ | \ \ / /
@@ -13,7 +27,6 @@ class synx(cmd.Cmd):
  
  """
     prompt = "synx > "
-
     def do_hi(self,arg):
         print("this is working")
 
@@ -28,7 +41,10 @@ class synx(cmd.Cmd):
         print("Thank you for trying SYNX \n")
         return True
 
+
+
     def do_port(self,arg):
+        print(arg)    
         port_scanner.run()
 
 
