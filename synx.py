@@ -12,5 +12,8 @@ class synx(cmd.Cmd):
  """
     prompt = "synx > "
 
+    def do_hi(self,arg):
+        print("this is working")
+
 
 synx().cmdloop()
