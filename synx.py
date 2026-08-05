@@ -64,8 +64,8 @@ class synx(cmd.Cmd):
             return
 
         port_scanner.run(args.start, args.end)
-        print(arg)    
-        port_scanner.run()
+        # print(arg)    
+        # port_scanner.run()
 
 
     do_exit = do_quit
