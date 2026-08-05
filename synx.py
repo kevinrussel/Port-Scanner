@@ -45,7 +45,25 @@ class synx(cmd.Cmd):
 
     def do_port(self,arg):
         parser = ShellArgParser(prog="port",add_help=False)
-        
+        parser.add_argument("--s", dest="start", type=int, required=True,
+                             help="start port")
+        parser.add_argument("--e", dest="end", type=int, required=True,
+                             help="end port")
+
+        try:
+            args = parser.parse_args(shlex.split(arg))
+        except ArgParseError as e:
+            print(f"Error: {e}")
+            return
+        except ValueError:
+            print("Error: start/end must be integers")
+            return
+
+        if args.start > args.end:
+            print("Error: --s must be <= --e")
+            return
+
+        port_scanner.run(args.start, args.end)
         print(arg)    
         port_scanner.run()
 
