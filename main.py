@@ -34,5 +34,5 @@ async def main():
         for entry in results:
             file.write(f"{entry}\n")
 
-
-asyncio.run(main())
+def run():
+    asyncio.run(main())

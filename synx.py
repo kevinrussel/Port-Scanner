@@ -1,6 +1,7 @@
 import cmd
 import os
 import subprocess
+import main
 
 class synx(cmd.Cmd):
     intro = r"""  _______     ___   ___   __
@@ -22,11 +23,13 @@ class synx(cmd.Cmd):
         else:
             subprocess.run('clear')
         
-
     def do_quit(self,arg):
         '''This will quit the synx shell'''
         print("Thank you for trying SYNX \n")
         return True
+
+    def do_port(self,arg):
+        main.run()
 
 
     do_exit = do_quit
