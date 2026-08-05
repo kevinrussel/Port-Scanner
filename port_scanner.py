@@ -35,6 +35,9 @@ async def main(start = 1000, end= 9000):
     with open("Every_Port_Status.txt", "w") as file:
         for entry in results:
             file.write(f"{entry}\n")
+    with open("open_port.txt","w") as file:
+        for entry in port_open:
+            file.write(f"{entry}\n")
 
 def run(start, end):
     asyncio.run(main(start,end))
