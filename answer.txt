@@ -3002,7 +3002,7 @@ Port 4000 is: closed
 Port 4001 is: closed
 Port 4002 is: closed
 Port 4003 is: closed
-Port 4004 is: open
+Port 4004 is: closed
 Port 4005 is: closed
 Port 4006 is: closed
 Port 4007 is: closed
@@ -6998,7 +6998,7 @@ Port 7996 is: closed
 Port 7997 is: closed
 Port 7998 is: closed
 Port 7999 is: closed
-Port 8000 is: open
+Port 8000 is: closed
 Port 8001 is: closed
 Port 8002 is: closed
 Port 8003 is: closed
