@@ -1,10 +1,10 @@
-import tcp_scanner
+import tcp_scan
 import struct
 import asyncio
 results = []
 async def send_packet(src_ip, dest_ip, port):
 
-    packet = tcp_scanner.Packet(src_ip,dest_ip,port)
+    packet = tcp_scan.Packet(src_ip,dest_ip,port)
     packet.generate_packet()
     try:
         result = await asyncio.wait_for(packet.send_packet(),timeout=1.0)

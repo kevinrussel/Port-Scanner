@@ -1,7 +1,7 @@
 import cmd
 import os
 import subprocess
-import main
+import port_scanner
 
 class synx(cmd.Cmd):
     intro = r"""  _______     ___   ___   __
@@ -29,7 +29,7 @@ class synx(cmd.Cmd):
         return True
 
     def do_port(self,arg):
-        main.run()
+        port_scanner.run()
 
 
     do_exit = do_quit
