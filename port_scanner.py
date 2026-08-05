@@ -2,6 +2,7 @@ import tcp_scan
 import struct
 import asyncio
 results = []
+port_open = []
 async def send_packet(src_ip, dest_ip, port):
 
     packet = tcp_scan.Packet(src_ip,dest_ip,port)
@@ -24,6 +25,7 @@ def check_if_open(port, response):
 
     if (flags & 0x1FF == 0x12):
         ans = "Port "+str(port)+" is: open"
+        port_open.append(ans)
     else:
         ans = "Port "+str(port)+" is: closed"
     results.append(ans)
