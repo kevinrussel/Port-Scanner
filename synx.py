@@ -46,11 +46,15 @@ class synx(cmd.Cmd):
             for line in f:
                 print(line.strip())
 
-    def do_synscan(self,arg):
+    def _build_synscan_parser(self):
         parser = ShellArgParser(prog="synscan", add_help=False)
         parser.add_argument("--port", dest="port", type=int, nargs=2,
                             metavar=("START", "END"), required=True,
                             help="start and end port")
+        return parser
+
+    def do_synscan(self,arg):
+        parser = self._build_synscan_parser()
 
         try:
             args = parser.parse_args(shlex.split(arg))
@@ -60,12 +64,9 @@ class synx(cmd.Cmd):
         except ValueError:
             print("Error: start/end must be integers")
             return
-        start,end = args.port
+        start,end = sorted(args.port)
         if(start == None and end == None):
             port_scanner.run()
-        elif start > end:
-            print("Error: Second Port Num Must be Great than First.")
-            return
         else:
             port_scanner.run(start, end)
         self.print_open_ports()
