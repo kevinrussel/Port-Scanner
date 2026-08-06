@@ -47,29 +47,29 @@ class synx(cmd.Cmd):
                 print(line.strip())
 
     def do_synscan(self,arg):
-        parser = ShellArgParser(prog="synscan",add_help=False)
-        parser.add_argument("--port", dest="start", type=int, required=False,
-                             help="start port")
-        parser.add_argument("--e", dest="end", type=int, required=False,
-                             help="end port")
+        parser = ShellArgParser(prog="synscan", add_help=False)
+        parser.add_argument("--port", dest="port", type=int, nargs=2,
+                            metavar=("START", "END"), required=False,
+                            help="start and end port")
 
         try:
             args = parser.parse_args(shlex.split(arg))
         except ArgParseError as e:
-            
             print(f"Error: {e}")
             return
         except ValueError:
             print("Error: start/end must be integers")
             return
-
-        if(args.start == None and args.end == None):
+        start,end = args.port
+        if(start == None and end == None):
             port_scanner.run()
         elif args.start > args.end:
-            print("Error: --s must be <= --e")
+            print("Error: Second Port Num Must be Great than First.")
             return
+        elif end == None:
+            port_scanner.run(start,9000)
         else:
-            port_scanner.run(args.start, args.end)
+            port_scanner.run(start, end)
         self.print_open_ports()
         # print(arg)    
         # port_scanner.run()
