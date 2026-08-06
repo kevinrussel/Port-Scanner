@@ -18,7 +18,7 @@ class ShellArgParser(argparse.ArgumentParser):
 
 
 class synx(cmd.Cmd):
-    intro = r"""_______     ___   ___   __
+    intro = r"""   _______     ___   ___   __
   / ____\ \   / / \ | \ \ / /
  | (___  \ \_/ /|  \| |\ V / 
   \___ \  \   / | . ` | > <  
