@@ -46,9 +46,9 @@ class synx(cmd.Cmd):
             for line in f:
                 print(line.strip())
 
-    def do_port(self,arg):
-        parser = ShellArgParser(prog="port",add_help=False)
-        parser.add_argument("--s", dest="start", type=int, required=False,
+    def do_synscan(self,arg):
+        parser = ShellArgParser(prog="synscan",add_help=False)
+        parser.add_argument("--port", dest="start", type=int, required=False,
                              help="start port")
         parser.add_argument("--e", dest="end", type=int, required=False,
                              help="end port")
