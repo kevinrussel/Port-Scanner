@@ -53,6 +53,10 @@ class synx(cmd.Cmd):
                             help="start and end port")
         return parser
 
+    def help_synscan(self):
+        parser = self._build_synscan_parser()
+        parser.print_help() 
+
     def do_synscan(self,arg):
         parser = self._build_synscan_parser()
 
