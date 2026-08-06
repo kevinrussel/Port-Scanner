@@ -49,7 +49,7 @@ class synx(cmd.Cmd):
     def do_synscan(self,arg):
         parser = ShellArgParser(prog="synscan", add_help=False)
         parser.add_argument("--port", dest="port", type=int, nargs=2,
-                            metavar=("START", "END"), required=False,
+                            metavar=("START", "END"), required=True,
                             help="start and end port")
 
         try:
@@ -63,16 +63,13 @@ class synx(cmd.Cmd):
         start,end = args.port
         if(start == None and end == None):
             port_scanner.run()
-        elif args.start > args.end:
+        elif start > end:
             print("Error: Second Port Num Must be Great than First.")
             return
-        elif end == None:
-            port_scanner.run(start,9000)
         else:
             port_scanner.run(start, end)
         self.print_open_ports()
-        # print(arg)    
-        # port_scanner.run()
+       
 
 
     do_exit = do_quit
