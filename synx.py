@@ -31,7 +31,7 @@ class synx(cmd.Cmd):
         print("this is working")
 
     def do_clear(self,arg):
-        ''''''
+        ''' Clears the terminal.'''
         if os.name == 'nt':
             subprocess.run('cls')
         else:
