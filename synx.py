@@ -27,8 +27,7 @@ class synx(cmd.Cmd):
  
  """
     prompt = "synx > "
-    def do_hi(self,arg):
-        print("this is working")
+   
 
     def do_clear(self,arg):
         ''' Clears the terminal.'''
