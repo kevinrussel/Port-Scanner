@@ -56,11 +56,9 @@ class Packet:
         self.ack = 0x0
         self.psh = 0x0
         self.rst = 0x0
-        self.syn = 0x1
+        self.syn = 0x0
         self.fin = 0x0
         self.data_offset_res_flags = 0x0
-        ##TODO: Get rid of this.
-        (self.tcp_offset << 12) | (self.reserved << 9) | (self.ns << 8) | (self.cwr << 7)|(self.ece << 6) | (self.urg << 5) | (self.ack << 4) | (self.psh << 3) | (self.rst << 2) | (self.syn << 1) | (self.fin)
         self.window_size = 0x7110
 
         ## FOURTH CHUNK:
