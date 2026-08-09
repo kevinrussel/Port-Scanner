@@ -96,6 +96,8 @@ class Packet:
     
     def generate_syn_packet(self):
         # IP Header + checksum
+        self.data_offset_res_flags = self.calculate_tcp_flags(tcp_offset=self.tcp_offset,reserved=self.reserved,ns=self.ns,cwr=self.cwr,ece=self.ece,urg=self.urg,ack=self.ack,psh=self.psh,rst=self.rst,syn=0x1,fin=self.fin)
+
         final_ip_header = pack("!BBHHHBBH4s4s",self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset,self.ttl,self.protocol,self.calc_checksum(self.generate_tmp_ip_header()),self.src_addr,self.dest_addr)
 
         tmp_tcp_header = self.generate_tmp_tcp_header()
