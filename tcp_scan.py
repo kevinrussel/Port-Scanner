@@ -91,7 +91,11 @@ class Packet:
     def generate_tmp_tcp_header(self):
         tmp_tcp_header = pack("!HHLLHHHH",self.src_port,self.dest_port,self.seq_num,self.ack_num,self.data_offset_res_flags,self.window_size,self.tcp_checksum,self.urg_pointer)
         return tmp_tcp_header
-    
+
+    def generate_packet(self,ip_header,tcp_header):
+        self.ip_header = ip_header
+        self.tcp_header = tcp_header
+        return ip_header + tcp_header
     def generate_syn_packet(self):
         # IP Header + checksum
         self.data_offset_res_flags = self.calculate_tcp_flags(tcp_offset=self.tcp_offset,reserved=self.reserved,ns=self.ns,cwr=self.cwr,ece=self.ece,urg=self.urg,ack=self.ack,psh=self.psh,rst=self.rst,syn=0x1,fin=self.fin)
@@ -102,11 +106,19 @@ class Packet:
         pseudo_header = pack("!4s4sBBH",self.src_addr,self.dest_addr,0x0,self.protocol,len(tmp_tcp_header))
         psh = pseudo_header + tmp_tcp_header
         final_tcp_header = pack("!HHLLHHHH",self.src_port,self.dest_port,self.seq_num,self.ack_num,self.data_offset_res_flags,self.window_size,self.calc_checksum(psh),self.urg_pointer)
+        self.packet = self.generate_packet(final_ip_header,final_tcp_header)
 
+    def generate_fin_packet(self):
+        # IP Header + checksum
+        self.data_offset_res_flags = self.calculate_tcp_flags(tcp_offset=self.tcp_offset,reserved=self.reserved,ns=self.ns,cwr=self.cwr,ece=self.ece,urg=self.urg,ack=self.ack,psh=self.psh,rst=self.rst,syn=self.syn,fin=0x1)
 
-        self.ip_header  = final_ip_header
-        self.tcp_header = final_tcp_header
-        self.packet = self.ip_header + self.tcp_header
+        final_ip_header = pack("!BBHHHBBH4s4s",self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset,self.ttl,self.protocol,self.calc_checksum(self.generate_tmp_ip_header()),self.src_addr,self.dest_addr)
+
+        tmp_tcp_header = self.generate_tmp_tcp_header()
+        pseudo_header = pack("!4s4sBBH",self.src_addr,self.dest_addr,0x0,self.protocol,len(tmp_tcp_header))
+        psh = pseudo_header + tmp_tcp_header
+        final_tcp_header = pack("!HHLLHHHH",self.src_port,self.dest_port,self.seq_num,self.ack_num,self.data_offset_res_flags,self.window_size,self.calc_checksum(psh),self.urg_pointer)
+        self.packet = self.generate_packet(final_ip_header,final_tcp_header)
 
     async def send_packet(self):
         s = socket.socket(socket.AF_INET,socket.SOCK_RAW,socket.IPPROTO_TCP)
