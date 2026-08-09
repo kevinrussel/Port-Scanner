@@ -6,7 +6,7 @@ port_open = []
 async def send_packet(src_ip, dest_ip, port):
 
     packet = tcp_scan.Packet(src_ip,dest_ip,port)
-    packet.generate_packet()
+    packet.generate_syn_packet()
     try:
         result = await asyncio.wait_for(packet.send_packet(),timeout=1.0)
         check_if_open(port,result)
@@ -30,7 +30,7 @@ def check_if_open(port, response):
         ans = "Port "+str(port)+" is: closed"
     results.append(ans)
 
-    
+
 async def main(start, end):
     tasks = [send_packet("127.0.0.1", "127.0.0.1",value) for value in range(start,end)]   
     await asyncio.gather(*tasks)
