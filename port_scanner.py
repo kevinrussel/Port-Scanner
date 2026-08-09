@@ -29,6 +29,8 @@ def check_if_open(port, response):
     else:
         ans = "Port "+str(port)+" is: closed"
     results.append(ans)
+
+    
 async def main(start, end):
     tasks = [send_packet("127.0.0.1", "127.0.0.1",value) for value in range(start,end)]   
     await asyncio.gather(*tasks)

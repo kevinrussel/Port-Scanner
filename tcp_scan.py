@@ -69,6 +69,9 @@ class Packet:
         self.tcp_header = b""
         self.packet = b""
 
+    def calculate_tcp_flags(self,tcp_offset,reserved,ns,cwr,ece,urg,ack,psh,rst,syn,fin):
+        pass
+
     def calc_checksum(self, msg):
         s = 0
         for i in range(0, len(msg), 2):
@@ -89,7 +92,7 @@ class Packet:
         tmp_tcp_header = pack("!HHLLHHHH",self.src_port,self.dest_port,self.seq_num,self.ack_num,self.data_offset_res_flags,self.window_size,self.tcp_checksum,self.urg_pointer)
         return tmp_tcp_header
     
-    def generate_packet(self):
+    def generate_syn_packet(self):
         # IP Header + checksum
         final_ip_header = pack("!BBHHHBBH4s4s",self.v_ihl,self.tos,self.total_length,self.identification,self.f_fragment_offset,self.ttl,self.protocol,self.calc_checksum(self.generate_tmp_ip_header()),self.src_addr,self.dest_addr)
 
