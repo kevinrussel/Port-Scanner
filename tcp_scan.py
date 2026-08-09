@@ -47,17 +47,17 @@ class Packet:
         self.ack_num = 0x0
 
         ## Third chunk
-        # self.tcp_offset = 0x5
-        # self.reserved = 0x0
-        # self.ns = 0x0
-        # self.cwr = 0x0
-        # self.ece = 0x0
-        # self.urg = 0x0
-        # self.ack = 0x0
-        # self.psh = 0x0
-        # self.rst = 0x0
-        # self.syn = 0x1
-        # self.fin = 0x0
+        self.tcp_offset = 0x5
+        self.reserved = 0x0
+        self.ns = 0x0
+        self.cwr = 0x0
+        self.ece = 0x0
+        self.urg = 0x0
+        self.ack = 0x0
+        self.psh = 0x0
+        self.rst = 0x0
+        self.syn = 0x1
+        self.fin = 0x0
         self.data_offset_res_flags = 0x0
         ##TODO: Get rid of this.
         (self.tcp_offset << 12) | (self.reserved << 9) | (self.ns << 8) | (self.cwr << 7)|(self.ece << 6) | (self.urg << 5) | (self.ack << 4) | (self.psh << 3) | (self.rst << 2) | (self.syn << 1) | (self.fin)
@@ -72,7 +72,7 @@ class Packet:
         self.packet = b""
 
     def calculate_tcp_flags(self,tcp_offset,reserved,ns,cwr,ece,urg,ack,psh,rst,syn,fin):
-        return (self.tcp_offset << 12) | (self.reserved << 9) | (self.ns << 8) | (self.cwr << 7)|(self.ece << 6) | (self.urg << 5) | (self.ack << 4) | (self.psh << 3) | (self.rst << 2) | (self.syn << 1) | (self.fin)
+        return (tcp_offset << 12) | (reserved << 9) | (ns << 8) | (cwr << 7)|(ece << 6) | (urg << 5) | (ack << 4) | (psh << 3) | (rst << 2) | (syn << 1) | (fin)
 
     def calc_checksum(self, msg):
         s = 0
