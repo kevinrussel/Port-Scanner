@@ -46,7 +46,7 @@ class Packet:
         self.seq_num = 0x0
         self.ack_num = 0x0
 
-        ## Third chunck
+        ## Third chunk
         self.tcp_offset = 0x5
         self.reserved = 0x0
         self.ns = 0x0
