@@ -74,9 +74,9 @@ class synx(cmd.Cmd):
             return
         start,end = sorted(args.port)
         if(start == None and end == None):
-            port_scanner.run()
+            port_scanner.run(type_of_scan="synscan")
         else:
-            port_scanner.run(start, end)
+            port_scanner.run(start, end,"synscan")
         self.print_open_ports()
 
     def do_finscan(self,arg):
@@ -92,9 +92,9 @@ class synx(cmd.Cmd):
             return
         start,end = sorted(args.port)
         if(start == None and end == None):
-            port_scanner.run()
+            port_scanner.run(type_of_scan="finscan")
         else:
-            port_scanner.run(start, end)
+            port_scanner.run(start, end,"finscan")
         self.print_open_ports()
        
 
