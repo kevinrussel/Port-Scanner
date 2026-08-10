@@ -57,6 +57,8 @@ class synx(cmd.Cmd):
         parser = self._build_synscan_parser("synscan")
         parser.print_help() 
 
+    
+
     def do_synscan(self,arg):
         parser = self._build_synscan_parser("synscan")
 
@@ -76,7 +78,22 @@ class synx(cmd.Cmd):
         self.print_open_ports()
 
     def do_finscan(self,arg):
-        print("hello world")
+        parser = self._build_synscan_parser("synscan")
+        
+        try:
+            args = parser.parse_args(shlex.split(arg))
+        except ArgParseError as e:
+            print(f"Error: {e}")
+            return
+        except ValueError:
+            print("Error: start/end must be integers")
+            return
+        start,end = sorted(args.port)
+        if(start == None and end == None):
+            port_scanner.run()
+        else:
+            port_scanner.run(start, end)
+        self.print_open_ports()
        
 
 
