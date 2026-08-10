@@ -3,10 +3,13 @@ import struct
 import asyncio
 results = []
 port_open = []
-async def send_packet(src_ip, dest_ip, port):
+async def send_packet(src_ip, dest_ip, port,type_of_scan):
 
     packet = tcp_scan.Packet(src_ip,dest_ip,port)
-    packet.generate_syn_packet()
+    if(type_of_scan == "synscan"):
+        packet.generate_syn_packet()
+    elif(type_of_scan == "finscan"):
+        packet.generate_fin_packet()
     try:
         result = await asyncio.wait_for(packet.send_packet(),timeout=1.0)
         check_if_open(port,result)
@@ -31,7 +34,7 @@ def check_if_open(port, response):
     results.append(ans)
 
 
-async def main(start, end):
+async def main(start, end,type_of_scan):
     tasks = [send_packet("127.0.0.1", "127.0.0.1",value) for value in range(start,end)]   
     await asyncio.gather(*tasks)
     with open("Every_Port_Status.txt", "w") as file:
@@ -41,5 +44,5 @@ async def main(start, end):
         for entry in port_open:
             file.write(f"{entry}\n")
 
-def run(start = 1000, end = 9000):
-    asyncio.run(main(start,end))
+def run(start = 1000, end = 9000,type_of_scan = "synscan"):
+    asyncio.run(main(start,end,type_of_scan))
