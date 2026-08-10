@@ -46,7 +46,7 @@ class synx(cmd.Cmd):
             for line in f:
                 print(line.strip())
 
-    def _build_synscan_parser(self,scan_type):
+    def _build_scan_parser(self,scan_type):
         parser = ShellArgParser(prog=scan_type, add_help=False)
         parser.add_argument("--port", dest="port", type=int, nargs=2,
                             metavar=("START", "END"), required=True,
@@ -54,13 +54,14 @@ class synx(cmd.Cmd):
         return parser
 
     def help_synscan(self):
-        parser = self._build_synscan_parser("synscan")
+        parser = self._build_scan_parser("synscan")
         parser.print_help() 
 
-    
+    def help_finscan(self):
+        parser = self._build_scan_parser
 
     def do_synscan(self,arg):
-        parser = self._build_synscan_parser("synscan")
+        parser = self._build_scan_parser("synscan")
 
         try:
             args = parser.parse_args(shlex.split(arg))
