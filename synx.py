@@ -58,7 +58,8 @@ class synx(cmd.Cmd):
         parser.print_help() 
 
     def help_finscan(self):
-        parser = self._build_scan_parser
+        parser = self._build_scan_parser("finscan")
+        parser.print_help()
 
     def do_synscan(self,arg):
         parser = self._build_scan_parser("synscan")
