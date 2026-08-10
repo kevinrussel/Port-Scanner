@@ -80,7 +80,7 @@ class synx(cmd.Cmd):
         self.print_open_ports()
 
     def do_finscan(self,arg):
-        parser = self._build_synscan_parser("synscan")
+        parser = self._build_scan_parser("finscan")
         
         try:
             args = parser.parse_args(shlex.split(arg))
