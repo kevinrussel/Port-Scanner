@@ -35,7 +35,7 @@ def check_if_open(port, response):
 
 
 async def main(start, end,type_of_scan):
-    tasks = [send_packet("127.0.0.1", "127.0.0.1",value) for value in range(start,end)]   
+    tasks = [send_packet("127.0.0.1", "127.0.0.1",value) for value in range(start,end,type_of_scan)]   
     await asyncio.gather(*tasks)
     with open("Every_Port_Status.txt", "w") as file:
         for entry in results:

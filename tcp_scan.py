@@ -69,6 +69,12 @@ class Packet:
         self.tcp_header = b""
         self.packet = b""
 
+
+
+        self.s = socket.socket(socket.AF_INET,socket.SOCK_RAW,socket.IPPROTO_TCP)
+        self.s.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
+        self.s.setblocking(False)
+
     def calculate_tcp_flags(self,tcp_offset,reserved,ns,cwr,ece,urg,ack,psh,rst,syn,fin):
         return (tcp_offset << 12) | (reserved << 9) | (ns << 8) | (cwr << 7)|(ece << 6) | (urg << 5) | (ack << 4) | (psh << 3) | (rst << 2) | (syn << 1) | (fin)
 
@@ -119,10 +125,10 @@ class Packet:
         self.packet = self.generate_packet(final_ip_header,final_tcp_header)
 
     async def send_packet(self):
-        s = socket.socket(socket.AF_INET,socket.SOCK_RAW,socket.IPPROTO_TCP)
-        s.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
-        s.setblocking(False)
-        s.sendto(self.packet,(self.dest_ip,0))
+        # s = socket.socket(socket.AF_INET,socket.SOCK_RAW,socket.IPPROTO_TCP)
+        # s.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
+        # s.setblocking(False)
+        self.s.sendto(self.packet,(self.dest_ip,0))
         loop = asyncio.get_event_loop()
 
         ## Linux sends an immediate SYN back the moment we send out the packet, this is to ignore that
@@ -136,7 +142,7 @@ class Packet:
             )
             if src_port == self.dest_port and dst_port == self.src_port:
                 break
-        s.close()
+        self.s.close()
         return data
 
     
