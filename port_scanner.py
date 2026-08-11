@@ -20,7 +20,7 @@ async def send_packet(src_ip, dest_ip, port,type_of_scan):
         try:
             result = await asyncio.wait_for(packet.send_packet(),timeout=0.5)
         except asyncio.TimeoutError:
-            print(f"Port {port} is: filtered (no response)")
+            port_open.append(f"Port {port} is: filtered (no response)")
     
 
 
@@ -42,8 +42,6 @@ def check_if_open(port, response):
 
 
 async def main(start, end,type_of_scan):
-    results = []
-    port_open = []
     tasks = [send_packet("127.0.0.1", "127.0.0.1",value,type_of_scan) for value in range(start,end)]   
     await asyncio.gather(*tasks)
     if(type_of_scan == "synscan"):
@@ -53,7 +51,10 @@ async def main(start, end,type_of_scan):
         with open("open_port.txt","w") as file:
             for entry in port_open:
                 file.write(f"{entry}\n")
-    
+    elif (type_of_scan == "finscan"):
+        with open("open_port.txt","w") as file:
+                    for entry in port_open:
+                        file.write(f"{entry}\n")
 
 
 
