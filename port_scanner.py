@@ -11,11 +11,13 @@ async def send_packet(src_ip, dest_ip, port,type_of_scan):
     elif(type_of_scan == "finscan"):
         packet.generate_fin_packet()
     try:
-        result = await asyncio.wait_for(packet.send_packet(),timeout=1.0)
+        result = await asyncio.wait_for(packet.send_packet(),timeout=0.5)
         check_if_open(port,result)
     except asyncio.TimeoutError:
         print(f"Port {port} is: filtered (no response)")
     
+
+def check_if_rst_flag(port,response):
 
 def check_if_open(port, response):
     
