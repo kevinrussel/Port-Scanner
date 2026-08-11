@@ -3,21 +3,26 @@ import struct
 import asyncio
 results = []
 port_open = []
-async def send_packet(src_ip, dest_ip, port,type_of_scan):
 
+
+
+async def send_packet(src_ip, dest_ip, port,type_of_scan):
     packet = tcp_scan.Packet(src_ip,dest_ip,port)
     if(type_of_scan == "synscan"):
         packet.generate_syn_packet()
+        try:
+            result = await asyncio.wait_for(packet.send_packet(),timeout=0.5)
+            check_if_open(port,result)
+        except asyncio.TimeoutError:
+                print(f"Port {port} is: filtered (no response)")
     elif(type_of_scan == "finscan"):
         packet.generate_fin_packet()
-    try:
-        result = await asyncio.wait_for(packet.send_packet(),timeout=0.5)
-        check_if_open(port,result)
-    except asyncio.TimeoutError:
-        print(f"Port {port} is: filtered (no response)")
+        try:
+            result = await asyncio.wait_for(packet.send_packet(),timeout=0.5)
+        except asyncio.TimeoutError:
+            print(f"Port {port} is: filtered (no response)")
     
 
-def check_if_rst_flag(port,response):
 
 def check_if_open(port, response):
     
@@ -37,6 +42,8 @@ def check_if_open(port, response):
 
 
 async def main(start, end,type_of_scan):
+    results = []
+    port_open = []
     tasks = [send_packet("127.0.0.1", "127.0.0.1",value,type_of_scan) for value in range(start,end)]   
     await asyncio.gather(*tasks)
     if(type_of_scan == "synscan"):
@@ -46,10 +53,7 @@ async def main(start, end,type_of_scan):
         with open("open_port.txt","w") as file:
             for entry in port_open:
                 file.write(f"{entry}\n")
-    else:
-        total_entries = []
-        for i in range(start,end):
-            total_entries.append(i)
+    
 
 
 
