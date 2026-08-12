@@ -118,6 +118,9 @@ class Packet:
         final_tcp_header = pack("!HHLLHHHH",self.src_port,self.dest_port,self.seq_num,self.ack_num,self.data_offset_res_flags,self.window_size,self.calc_checksum(psh),self.urg_pointer)
         self.packet = self.generate_packet(final_ip_header,final_tcp_header)
 
+
+    def genearte_null_packet(self):
+        
     async def send_packet(self):
         s = socket.socket(socket.AF_INET,socket.SOCK_RAW,socket.IPPROTO_TCP)
         s.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
