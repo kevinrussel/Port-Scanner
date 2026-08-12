@@ -62,6 +62,10 @@ class synx(cmd.Cmd):
         parser = self._build_scan_parser("finscan")
         parser.print_help()
 
+    def help_nullscan(self):
+            parser = self._build_scan_parser("nullscan")
+            parser.print_help()
+
     def do_synscan(self,arg):
         port_scanner = ScanPort()
         parser = self._build_scan_parser("synscan")
@@ -84,7 +88,8 @@ class synx(cmd.Cmd):
     def do_finscan(self,arg):
         port_scanner = ScanPort()
         parser = self._build_scan_parser("finscan")
-        
+
+
         try:
             args = parser.parse_args(shlex.split(arg))
         except ArgParseError as e:
