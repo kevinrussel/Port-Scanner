@@ -1,8 +1,6 @@
 import tcp_scan
 import struct
 import asyncio
-results = []
-port_open = []
 
 ##TODO: FIX THE ARRAYS AhhhHHHHHHH
 
@@ -29,7 +27,7 @@ class ScanPort:
             try:
                 result = await asyncio.wait_for(packet.send_packet(),timeout=0.5)
             except asyncio.TimeoutError:
-                port_open.append(f"Port {port} is: filtered (no response)")
+                self.port_open.append(f"Port {port} is: filtered (no response)")
             
 
 
@@ -42,10 +40,10 @@ class ScanPort:
 
         if (flags & 0x1FF == 0x12):
             ans = "Port "+str(port)+" is: open"
-            port_open.append(ans)
+            self.port_open.append(ans)
         else:
             ans = "Port "+str(port)+" is: closed"
-        results.append(ans)
+        self.results.append(ans)
 
 
     async def main(self,start, end,type_of_scan): 
@@ -54,14 +52,14 @@ class ScanPort:
         await asyncio.gather(*tasks)
         if(type_of_scan == "synscan"):
             with open("Every_Port_Status.txt", "w") as file:
-                for entry in results:
+                for entry in self.results:
                     file.write(f"{entry}\n")
             with open("open_port.txt","w") as file:
-                for entry in port_open:
+                for entry in self.port_open:
                     file.write(f"{entry}\n")
         elif (type_of_scan == "finscan"):
             with open("open_port.txt","w") as file:
-                        for entry in port_open:
+                        for entry in self.port_open:
                             file.write(f"{entry}\n")
     
 
