@@ -2,6 +2,7 @@ import cmd
 import os
 import subprocess
 import port_scanner
+from port_scanner import ScanPort
 
 
 import argparse

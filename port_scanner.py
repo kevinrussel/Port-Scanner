@@ -13,8 +13,9 @@ class ScanPort:
         self.port_open = []
         self.start_port = 1000
         self.end_port = 9000
+        self.type_of_scan = "synscan"
           
-    async def send_packet(src_ip, dest_ip, port,type_of_scan):
+    async def send_packet(self,src_ip, dest_ip, port,type_of_scan):
         packet = tcp_scan.Packet(src_ip,dest_ip,port)
         if(type_of_scan == "synscan"):
             packet.generate_syn_packet()
@@ -32,7 +33,7 @@ class ScanPort:
             
 
 
-    def check_if_open(port, response):
+    def check_if_open(self,port, response):
         ip = response[:20]
         tcp = response[20:40]
         src_port, dst_port, seq, ack, flags, *_ = struct.unpack(
@@ -47,7 +48,7 @@ class ScanPort:
         results.append(ans)
 
 
-    async def main(start, end,type_of_scan): 
+    async def main(self,start, end,type_of_scan): 
         
         tasks = [send_packet("127.0.0.1", "127.0.0.1",value,type_of_scan) for value in range(start,end)]   
         await asyncio.gather(*tasks)
