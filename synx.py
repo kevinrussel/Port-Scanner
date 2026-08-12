@@ -48,7 +48,7 @@ class synx(cmd.Cmd):
 
     def _build_scan_parser(self,scan_type):
         parser = ShellArgParser(prog=scan_type, add_help=False)
-        parser.add_argument("--port", dest="port", type=int, nargs=2,
+        parser.add_argument("-p", dest="port", type=int, nargs=2,
                             metavar=("START", "END"), required=True,
                             help="start and end port")
         return parser
