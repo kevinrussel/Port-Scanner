@@ -124,7 +124,7 @@ class synx(cmd.Cmd):
             port_scanner.run(start, end,"nullscan")
         self.print_open_ports()
 
-    def do_nullscan(self,arg):
+    def do_xmascan(self,arg):
             port_scanner = ScanPort()
             parser = self._build_scan_parser("xmascan")
             try:
