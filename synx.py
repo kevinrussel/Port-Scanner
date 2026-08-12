@@ -1,10 +1,7 @@
 import cmd
 import os
 import subprocess
-
 from port_scanner import ScanPort
-
-
 import argparse
 import shlex
 
