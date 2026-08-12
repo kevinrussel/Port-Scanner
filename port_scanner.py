@@ -21,7 +21,7 @@ class ScanPort:
             packet.generate_syn_packet()
             try:
                 result = await asyncio.wait_for(packet.send_packet(),timeout=0.5)
-                check_if_open(port,result)
+                self.check_if_open(port,result)
             except asyncio.TimeoutError:
                     print(f"Port {port} is: filtered (no response)")
         elif(type_of_scan == "finscan"):
@@ -50,7 +50,7 @@ class ScanPort:
 
     async def main(self,start, end,type_of_scan): 
         
-        tasks = [send_packet("127.0.0.1", "127.0.0.1",value,type_of_scan) for value in range(start,end)]   
+        tasks = [self.send_packet("127.0.0.1", "127.0.0.1",value,type_of_scan) for value in range(start,end)]   
         await asyncio.gather(*tasks)
         if(type_of_scan == "synscan"):
             with open("Every_Port_Status.txt", "w") as file:

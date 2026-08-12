@@ -1,7 +1,7 @@
 import cmd
 import os
 import subprocess
-import port_scanner
+
 from port_scanner import ScanPort
 
 
@@ -63,6 +63,7 @@ class synx(cmd.Cmd):
         parser.print_help()
 
     def do_synscan(self,arg):
+        port_scanner = ScanPort()
         parser = self._build_scan_parser("synscan")
 
         try:
@@ -81,6 +82,7 @@ class synx(cmd.Cmd):
         self.print_open_ports()
 
     def do_finscan(self,arg):
+        port_scanner = ScanPort()
         parser = self._build_scan_parser("finscan")
         
         try:
