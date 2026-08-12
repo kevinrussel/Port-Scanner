@@ -65,7 +65,7 @@ class synx(cmd.Cmd):
     def help_nullscan(self):
             parser = self._build_scan_parser("nullscan")
             parser.print_help()
-    def help_xmasscan(self):
+    def help_xmascan(self):
             parser = self._build_scan_parser("synscan")
             parser.print_help() 
 
@@ -126,5 +126,23 @@ class synx(cmd.Cmd):
         else:
             port_scanner.run(start, end,"nullscan")
         self.print_open_ports()
+
+    def do_nullscan(self,arg):
+            port_scanner = ScanPort()
+            parser = self._build_scan_parser("xmascan")
+            try:
+                args = parser.parse_args(shlex.split(arg))
+            except ArgParseError as e:
+                print(f"Error: {e}")
+                return
+            except ValueError:
+                print("Error: start/end must be integers")
+                return
+            start,end = sorted(args.port)
+            if(start == None and end == None):
+                port_scanner.run(type_of_scan="xmas")
+            else:
+                port_scanner.run(start, end,"xmas")
+            self.print_open_ports()
     do_exit = do_quit
 synx().cmdloop()
