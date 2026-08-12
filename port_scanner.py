@@ -2,7 +2,7 @@ import tcp_scan
 import struct
 import asyncio
 
-##TODO: FIX THE ARRAYS AhhhHHHHHHH
+
 
 class ScanPort:
 
