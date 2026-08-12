@@ -119,7 +119,7 @@ class Packet:
         self.packet = self.generate_packet(final_ip_header,final_tcp_header)
 
 
-    def genearte_null_packet(self):
+    def generate_null_packet(self):
 
         # IP Header + checksum
         self.data_offset_res_flags = self.calculate_tcp_flags(tcp_offset=self.tcp_offset,reserved=self.reserved,ns=self.ns,cwr=self.cwr,ece=self.ece,urg=self.urg,ack=self.ack,psh=self.psh,rst=self.rst,syn=self.syn,fin=self.fin)

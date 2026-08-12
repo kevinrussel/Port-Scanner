@@ -30,7 +30,7 @@ class ScanPort:
                 self.port_open.append(f"Port {port} is: filtered (no response)")
 
         elif (type_of_scan == "nullscan"):
-            packet.genearte_null_packet()
+            packet.generate_null_packet()
             try:
                 result = await asyncio.wait_for(packet.send_packet(),timeout=0.5)
             except asyncio.TimeoutError:
