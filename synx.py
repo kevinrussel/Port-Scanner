@@ -65,6 +65,9 @@ class synx(cmd.Cmd):
     def help_nullscan(self):
             parser = self._build_scan_parser("nullscan")
             parser.print_help()
+    def help_xmasscan(self):
+            parser = self._build_scan_parser("synscan")
+            parser.print_help() 
 
     def do_synscan(self,arg):
         port_scanner = ScanPort()
