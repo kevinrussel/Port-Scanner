@@ -9,8 +9,10 @@ port_open = []
 class ScanPort:
 
     def __init__(self):
-          self.results = []
-          self.port_open = []
+        self.results = []
+        self.port_open = []
+        self.start_port = 1000
+        self.end_port = 9000
           
     async def send_packet(src_ip, dest_ip, port,type_of_scan):
         packet = tcp_scan.Packet(src_ip,dest_ip,port)
@@ -64,5 +66,5 @@ class ScanPort:
 
 
 
-def run(start = 1000, end = 9000,type_of_scan = "synscan"):
-    asyncio.run(main(start,end,type_of_scan))
+    def run(self,start = 1000, end = 9000,type_of_scan = "synscan"):
+        asyncio.run(self.main(start,end,type_of_scan))
