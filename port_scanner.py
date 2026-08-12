@@ -7,7 +7,7 @@ port_open = []
 ##TODO: FIX THE ARRAYS AhhhHHHHHHH
 
 
-async def send_packet(src_ip, dest_ip, port,type_of_scan,results,port_open):
+async def send_packet(src_ip, dest_ip, port,type_of_scan):
     packet = tcp_scan.Packet(src_ip,dest_ip,port)
     if(type_of_scan == "synscan"):
         packet.generate_syn_packet()
@@ -22,7 +22,7 @@ async def send_packet(src_ip, dest_ip, port,type_of_scan,results,port_open):
             result = await asyncio.wait_for(packet.send_packet(),timeout=0.5)
         except asyncio.TimeoutError:
             port_open.append(f"Port {port} is: filtered (no response)")
-        return port_open
+        
 
 
 def check_if_open(port, response,results):
@@ -42,12 +42,9 @@ def check_if_open(port, response,results):
     results.append(ans)
 
 
-async def main(start, end,type_of_scan):
-
-    results = []
-    port_open = []
+async def main(start, end,type_of_scan): 
     
-    tasks = [send_packet("127.0.0.1", "127.0.0.1",value,type_of_scan,results,port_open) for value in range(start,end)]   
+    tasks = [send_packet("127.0.0.1", "127.0.0.1",value,type_of_scan) for value in range(start,end)]   
     await asyncio.gather(*tasks)
     if(type_of_scan == "synscan"):
         with open("Every_Port_Status.txt", "w") as file:
@@ -60,6 +57,9 @@ async def main(start, end,type_of_scan):
         with open("open_port.txt","w") as file:
                     for entry in port_open:
                         file.write(f"{entry}\n")
+    results = []
+    port_open = []
+    
 
 
 
