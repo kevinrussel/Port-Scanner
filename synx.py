@@ -104,6 +104,28 @@ class synx(cmd.Cmd):
         else:
             port_scanner.run(start, end,"finscan")
         self.print_open_ports()
+
+
+    def do_nullscan(self,arg):
+        port_scanner = ScanPort()
+        parser = self._build_scan_parser("finscan")
+
+
+        try:
+            args = parser.parse_args(shlex.split(arg))
+        except ArgParseError as e:
+            print(f"Error: {e}")
+            return
+        except ValueError:
+            print("Error: start/end must be integers")
+            return
+        start,end = sorted(args.port)
+        if(start == None and end == None):
+            port_scanner.run(type_of_scan="finscan")
+        else:
+            port_scanner.run(start, end,"finscan")
+        self.print_open_ports()
+
        
 
 
