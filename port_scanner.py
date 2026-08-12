@@ -37,7 +37,7 @@ class ScanPort:
                 self.port_open.append(f"Port {port} is: filtered (no response)")
 
         elif (type_of_scan == "xmas"):
-                    packet.generate_null_packet()
+                    packet.generate_xmas_packet()
                     try:
                         result = await asyncio.wait_for(packet.send_packet(),timeout=0.5)
                     except asyncio.TimeoutError:
