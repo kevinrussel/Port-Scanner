@@ -108,9 +108,7 @@ class synx(cmd.Cmd):
 
     def do_nullscan(self,arg):
         port_scanner = ScanPort()
-        parser = self._build_scan_parser("finscan")
-
-
+        parser = self._build_scan_parser("nullscan")
         try:
             args = parser.parse_args(shlex.split(arg))
         except ArgParseError as e:
@@ -121,13 +119,9 @@ class synx(cmd.Cmd):
             return
         start,end = sorted(args.port)
         if(start == None and end == None):
-            port_scanner.run(type_of_scan="finscan")
+            port_scanner.run(type_of_scan="nullscan")
         else:
-            port_scanner.run(start, end,"finscan")
+            port_scanner.run(start, end,"nullscan")
         self.print_open_ports()
-
-       
-
-
     do_exit = do_quit
 synx().cmdloop()
