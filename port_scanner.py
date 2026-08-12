@@ -63,7 +63,7 @@ class ScanPort:
             with open("open_port.txt","w") as file:
                 for entry in self.port_open:
                     file.write(f"{entry}\n")
-        elif (type_of_scan == "finscan"):
+        elif (type_of_scan == "finscan" or type_of_scan == "nullscan"):
             with open("open_port.txt","w") as file:
                         for entry in self.port_open:
                             file.write(f"{entry}\n")
