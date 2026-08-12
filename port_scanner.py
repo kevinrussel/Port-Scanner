@@ -8,7 +8,9 @@ port_open = []
 
 class ScanPort:
 
-     def __init__(self):
+    def __init__(self):
+          self.results = []
+          self.port_open = []
           
     async def send_packet(src_ip, dest_ip, port,type_of_scan):
         packet = tcp_scan.Packet(src_ip,dest_ip,port)
